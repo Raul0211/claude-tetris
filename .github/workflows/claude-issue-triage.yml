@@ -100,6 +100,19 @@ jobs:
             Si el issue es demasiado vago para diagnosticarlo, escribe igualmente el archivo con la estructura anterior,
             explicando qué falta en "Información faltante".
 
+            ## Formato del diagnóstico (obligatorio)
+            El contenido de `diagnosis.md` se publica tal cual como comentario en GitHub, así que debe ser
+            Markdown válido según GitHub Flavored Markdown (GFM) y renderizarse correctamente en la interfaz de GitHub:
+            - Usa encabezados `##`/`###`, listas con `-` o `1.`, **negrita** y `código inline` con comillas invertidas.
+            - Los bloques de código deben ir entre triple comilla invertida con el lenguaje indicado
+              (p. ej. ```js) y cerrarse siempre.
+            - Si usas tablas, usa la sintaxis GFM con fila de cabecera y separador (`| --- |`).
+            - Deja una línea en blanco antes y después de encabezados, listas, tablas y bloques de código.
+            - No envuelvas todo el documento en un bloque de código ni lo indentes con 4 espacios (se mostraría como código).
+            - No uses HTML salvo etiquetas que GitHub admite (p. ej. `<details>`/`<summary>`), ni sintaxis
+              que GitHub no entienda (notas al pie complejas, LaTeX fuera de `$...$`, front matter YAML).
+            - Escribe las referencias como `archivo:línea` dentro de código inline para que se lean con claridad.
+
       - name: Publicar o actualizar comentario de diagnóstico
         env:
           GH_TOKEN: ${{ github.token }}
