@@ -22,7 +22,7 @@ Three files: `index.html` (DOM: `#board` canvas, side panel with `#score`/`#line
 
 Key points in `game.js` that span multiple pieces:
 
-- **Cell values double as color indices.** `PIECES[type]` matrices are filled with the piece's own type number (1–7), which is also its index into `COLORS`. The board stores these same numbers (`0` = empty). Adding or reordering a piece means keeping `PIECES` and `COLORS` aligned.
+- **Cell values double as color indices.** `PIECES[type]` matrices are filled with the piece's own type number (1–8; 8 is the non-standard "tuerca", a 3×3 ring with an empty center), which is also its index into `COLORS`. The board stores these same numbers (`0` = empty). Adding or reordering a piece means keeping `PIECES` and `COLORS` aligned; `randomPiece()` picks uniformly from `PIECES.length - 1` types, so it needs no change.
 - **Game state is module-level `let` globals** (`board`, `current`, `next`, `score`, `lines`, `level`, `paused`, `gameOver`, `dropAccum`, `dropInterval`, `animId`), all reset by `init()`, which is also the restart-button handler.
 - **Piece lifecycle:** `spawn()` promotes `next` → `current` and triggers `endGame()` if the new piece already collides. Locking always goes through `lockPiece()` → `merge()` → `clearLines()` → `spawn()` (used by gravity in `loop`, `softDrop`, and `hardDrop`).
 - **Rotation** is `rotateCW` (matrix rotation) plus naive horizontal kicks `[0, -1, 1, -2, 2]` in `tryRotate` — not SRS.
